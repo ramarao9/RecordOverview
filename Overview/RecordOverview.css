@@ -1,0 +1,23 @@
+.overviewCont{
+    height:100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.overviewItem{
+    color: #666;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    padding: 10px;
+}
+
+.itemTitle{
+   color: green;
+   text-align: center;
+}
+
+.itemSubTitle{
+
+}
