@@ -28,6 +28,16 @@ export const RecordOverview: React.FC<RecordOverviewProps> = (overviewProps: Rec
 
     const retrieveData = async (context: ComponentFramework.Context<IInputs>, id: string) => {
 
+
+        if(context.userSettings.userName==="")//local environment
+        {
+
+           return  [{ EntityCollectionName: "Activities", TotalCount: 36 }, 
+                    { EntityCollectionName: "Cases", TotalCount: 9},
+                    { EntityCollectionName: "Opportunities", TotalCount: 12 }];
+        }
+
+
         let activityFilter = `?$filter=_regardingobjectid_value eq ${id}&$apply=aggregate($count as ActivityCount)`;
         let activityResponse = await context.webAPI.retrieveMultipleRecords("activitypointer", activityFilter);
 

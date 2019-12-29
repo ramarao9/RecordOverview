@@ -1,7 +1,7 @@
 {
-  "name": "pcf-project",
+  "name": "recordoverview",
   "version": "1.0.0",
-  "description": "Project containing your PowerApps Component Framework (PCF) control.",
+  "description": "Provides an overview for a Dynamics365 record by showing the total activiies, cases and opportunities.",
   "scripts": {
     "build": "pcf-scripts build",
     "clean": "pcf-scripts clean",

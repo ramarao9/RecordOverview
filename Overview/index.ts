@@ -5,8 +5,6 @@ import { RecordOverview, RecordOverviewProps, RelatedRecordInfo } from './Record
 
 export class Overview implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
-
-	private recordId: string;
 	private overViewContainer: HTMLDivElement;
 	private _context: ComponentFramework.Context<IInputs>;
 	private overViewProps: RecordOverviewProps = {
@@ -27,13 +25,11 @@ export class Overview implements ComponentFramework.StandardControl<IInputs, IOu
 	 * @param container If a control is marked control-type='standard', it will receive an empty div element within which it can render its content.
 	 */
 	public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container: HTMLDivElement) {
-		console.log("hello1");
-		this._context = context;
+
 		let currentPageContext = context as any;
 		currentPageContext = currentPageContext ? currentPageContext["page"] : undefined;
 		if (currentPageContext && currentPageContext.entityId) {
-			this.recordId = currentPageContext.entityId;
-			this.overViewProps.id = this.recordId;
+			this.overViewProps.id = currentPageContext.entityId;
 			this.overViewProps.context = context;
 		}
 		this.overViewContainer = container;
@@ -45,6 +41,8 @@ export class Overview implements ComponentFramework.StandardControl<IInputs, IOu
 	 * @param context The entire property bag available to control via Context Object; It contains values as set up by the customizer mapped to names defined in the manifest, as well as utility functions
 	 */
 	public updateView(context: ComponentFramework.Context<IInputs>): void {
+
+		this.overViewProps.context = context;		
 		ReactDOM.render(
 			React.createElement(
 				RecordOverview,
@@ -54,23 +52,13 @@ export class Overview implements ComponentFramework.StandardControl<IInputs, IOu
 		);
 	}
 
-	/** 
-	 * It is called by the framework prior to a control receiving new data. 
-	 * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
-	 */
 	public getOutputs(): IOutputs {
 		return {};
 	}
 
-	/** 
-	 * Called when the control is to be removed from the DOM tree. Controls should use this call for cleanup.
-	 * i.e. cancelling any pending remote calls, removing listeners, etc.
-	 */
+
 	public destroy(): void {
 		ReactDOM.unmountComponentAtNode(this.overViewContainer);
 	}
-
-
-
 
 }
